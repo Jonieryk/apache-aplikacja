@@ -30,5 +30,5 @@ RUN a2enmod php7.4
 # Start Apache in the foreground
 CMD ["apachectl", "-D", "FOREGROUND"]
 
-# Health check: use apachectl to check if Apache is running correctly
-HEALTHCHECK --interval=30s --timeout=10s --start-period=5s CMD apachectl -k graceful || exit 1
+# Health check: use curl to check if Apache can connect with intex.php through http
+HEALTHCHECK --interval=30s --timeout=10s --start-period=5s CMD curl -f http://localhost/index.php || exit 1
